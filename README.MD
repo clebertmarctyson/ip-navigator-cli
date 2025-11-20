@@ -3,14 +3,12 @@
 [![npm version](https://img.shields.io/npm/v/ip-navigator-cli.svg)](https://www.npmjs.com/package/ip-navigator-cli)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-<a 
-  href="https://www.buymeacoffee.com/marctysonclebert" 
-  target="_blank">
-<img 
-    src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" 
-    alt="Buy Me A Coffee" 
-    style="height: 60px !important;width: 217px !important;"
-    />
+<a href="https://www.buymeacoffee.com/marctysonclebert" target="_blank" rel="noopener noreferrer">
+  <img
+    src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
+    alt="Buy Me A Coffee"
+    style="width: 12%; height: auto;"
+  />
 </a>
 
 🌐 A powerful command-line interface for IP address operations, powered by [ip-navigator](https://www.npmjs.com/package/ip-navigator).

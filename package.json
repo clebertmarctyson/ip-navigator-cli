@@ -46,7 +46,6 @@
     "url": "https://www.marctysonclebert.com"
   },
   "license": "MIT",
-  "packageManager": "pnpm@10.22.0",
   "dependencies": {
     "commander": "^14.0.2",
     "ip-navigator": "^1.0.17",
