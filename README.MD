@@ -1,233 +1,573 @@
-# ⚡ Node TypeScript Starter
+# ip-navigator-cli
 
-![Node-TS-Starter Banner](./assets/node-ts-starter-banner.png)
+[![npm version](https://img.shields.io/npm/v/ip-navigator-cli.svg)](https://www.npmjs.com/package/ip-navigator-cli)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-> 🚀 A blazing-fast, production-ready Node.js starter template that gets you coding in seconds, not hours.
+<a 
+  href="https://www.buymeacoffee.com/marctysonclebert" 
+  target="_blank">
+<img 
+    src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" 
+    alt="Buy Me A Coffee" 
+    style="height: 60px !important;width: 217px !important;"
+    />
+</a>
 
-Built with modern TypeScript, comprehensive testing, and developer-friendly tooling. Perfect for APIs, CLIs, microservices, and any Node.js project.
+🌐 A powerful command-line interface for IP address operations, powered by [ip-navigator](https://www.npmjs.com/package/ip-navigator).
 
-## ✨ What's Inside?
+## Features
 
-🎯 **TypeScript First** - Strict typing with zero configuration headaches  
-🧪 **Jest Ready** - Write tests that actually matter  
-🔥 **Hot Reload** - See changes instantly with `tsx` magic  
-📁 **Smart Imports** - Clean `@/*` paths instead of `../../../hell`  
-🌍 **Environment Sync** - Native `.env` support that just works  
-🧹 **Auto Cleanup** - Smart script to prepare your project in seconds  
-⚡ **Zero Setup** - Clone, install, code. That's it.
+✨ **Validation**
 
-## 🚀 Get Started in 30 Seconds
+- Validate IPv4 addresses, subnet masks, and CIDR notation
+- Batch validation of multiple IP addresses
+- Clear, informative error messages
 
-```bash
-# 📥 Create your project
-npx degit clebertmarctyson/node-ts-starter my-awesome-project
+🔄 **Conversion**
 
-# 📂 Jump in
-cd my-awesome-project
+- Convert between decimal, binary, and integer formats
+- Convert between CIDR notation and subnet masks
+- View all representations of an IP address at once
 
-# 🧹 Clean up template files (optional but recommended)
-pnpm clean
+📊 **Subnet Operations**
 
-# 📦 Install dependencies (if you didn't install during cleanup)
-pnpm install
+- Calculate network and broadcast addresses
+- Get comprehensive subnet information
+- Check if an IP belongs to a subnet
 
-# 🎉 Start building!
-pnpm dev
-```
+🛠️ **IP Operations**
 
-**Boom!** Your TypeScript server is running with hot reload. Time to build something amazing! 🎯
+- Classify IPs as public or private
+- Get next/previous IP addresses
+- Generate IP ranges
+- Compare IP addresses numerically
 
-## 🧹 Smart Project Cleanup
+## Installation
 
-The included `pnpm clean` command intelligently prepares your project:
-
-- ✅ Auto-names your project based on folder name
-- 🗑️ Removes example files (like `src/lib/math.ts`)
-- 🧪 Optionally removes test setup if you don't need it
-- 📦 Optionally installs dependencies for you
-- 📝 Clears README.md for your own documentation
-- ⚙️ Sets up `.env` file from `.env.example`
-
-**Just answer two simple questions and you're ready to go!**
+### Global Installation (Recommended)
 
 ```bash
-pnpm clean
-
-# Keep tests? (y/n): n
-# 
-# Deleted: jest.config.ts
-# Deleted: tests/
-# Deleted: pnpm-lock.yaml
-# Deleted: src/lib/math.ts
-# 
-# Install packages? (y/n): y
-# 
-# Installing packages...
-# 
-# ✨ Done!
+npm install -g ip-navigator-cli
 ```
 
-## 📁 Project Structure
+### Local Installation
 
-```
-🎯 my-awesome-project/
-├── 📂 src/
-│   ├── 🎯 index.ts              # Your app starts here
-│   ├── 📂 lib/                  # Reusable magic
-│   │   └── 🧮 math.ts          # Example utilities  
-│   └── 📂 tests/               # Test suite
-│       └── ✅ index.test.ts    # Example tests
-├── 🖼️ assets/                   # Static files
-├── ⚙️ .env.example              # Environment template
-├── 🧹 clean.ts                  # Project cleanup script
-└── 📋 package.json              # Project config
-```
-
-## 🛠️ Power Commands
-
-| 🎯 Command | 📝 What it does |
-|------------|----------------|
-| `pnpm clean` | 🧹 Prepare your project for development |
-| `pnpm dev` | 🔥 Development server with instant hot reload |
-| `pnpm build` | 🏗️ Production build with path resolution |
-| `pnpm start` | 🚀 Run your compiled production app |
-| `pnpm test` | 🧪 Run your test suite once |
-| `pnpm test:watch` | 👀 Tests in interactive watch mode |
-
-## 💎 Amazing Features
-
-### 🎯 Smart Path Aliases
-Say goodbye to import hell:
-```typescript
-// 😵 Before: Relative path nightmare
-import { helper } from '../../../lib/helpers/utility';
-
-// 😍 After: Clean and beautiful
-import { helper } from '@/lib/helpers/utility';
-```
-
-### 🌍 Environment Variables Made Easy
-Node.js native support means zero dependencies:
 ```bash
-# 📝 .env file
-PORT=3000
-DATABASE_URL=postgresql://localhost:5432/mydb
-API_SECRET=super-secret-key
+npm install ip-navigator-cli
 ```
 
-```typescript
-// 💻 Use anywhere in your code
-const port = process.env.PORT || 3000;
-const dbUrl = process.env.DATABASE_URL;
-```
+### Usage with npx (No Installation)
 
-### 🧪 Testing That Doesn't Suck
-Write tests with confidence using Jest + TypeScript:
-```typescript
-import { describe, expect, test } from '@jest/globals';
-import { calculateTotal } from '@/lib/calculator';
-
-describe('🧮 Calculator', () => {
-  test('should calculate totals like a boss', () => {
-    expect(calculateTotal([10, 20, 30])).toBe(60);
-  });
-});
-```
-
-## 🏗️ Production Ready
-
-### 🚀 Deploy Anywhere
 ```bash
-# 🔨 Build your masterpiece
-pnpm build
-
-# 🌍 Launch to production
-pnpm start
+npx ip-navigator-cli <command>
 ```
 
-Your app compiles to clean JavaScript with resolved path aliases - ready for any deployment platform!
+## Quick Start
 
-### 🎯 Perfect For
-- 🌐 **REST APIs** - Express, Fastify, or vanilla Node
-- 🔧 **CLI Tools** - Command-line applications  
-- ⚡ **Microservices** - Lightweight, fast services
-- 🤖 **Automation Scripts** - DevOps and build tools
-- 📊 **Data Processing** - ETL pipelines and analytics
-
-## 🎨 Customize Like a Pro
-
-### 🔧 Add Your Favorite Tools
 ```bash
-# 🌐 Web frameworks
-pnpm add express fastify
+# Validate an IP address
+ipnav validate-ip 192.168.1.1
 
-# 🗄️ Databases  
-pnpm add prisma mongoose
+# Get subnet information
+ipnav subnet-info 192.168.1.100 255.255.255.0
 
-# 🔒 Security & Auth
-pnpm add bcrypt jsonwebtoken
+# Convert IP to binary
+ipnav to-binary 192.168.1.1
 
-# 📊 Utilities
-pnpm add lodash date-fns zod
+# Classify IP as public or private
+ipnav classify 8.8.8.8
+
+# Generate IP range
+ipnav range 192.168.1.1 192.168.1.10
 ```
 
-### 📐 Project Structure Pro Tips
-- **`src/lib/`** - Your reusable utilities and helpers
-- **`src/services/`** - Business logic and external integrations  
-- **`src/routes/`** - API endpoints (if building a web server)
-- **`src/types/`** - TypeScript type definitions
-- **`src/tests/`** - Keep tests close to your code
+## Commands
 
-## 💡 Pro Development Tips
+### Validation Commands
 
-### 🎯 Best Practices Included
-- ✅ **Strict TypeScript** - Catch errors before they happen
-- 🧪 **Test Coverage** - Jest configured for comprehensive testing
-- 📁 **Clean Architecture** - Organized file structure
-- 🔄 **Hot Reload** - Instant feedback loop
-- 🌍 **Environment Safety** - Secure config management
-- 🧹 **Quick Setup** - One command to prepare your project
+#### `validate-ip <address>` (alias: `vip`)
 
-### 🚀 Productivity Boosters
-1. **Run cleanup first** - `pnpm clean` sets up everything in one go
-2. **Use path aliases everywhere** - `@/lib/utils` is cleaner than `../../../lib/utils`
-3. **Write tests first** - `pnpm test:watch` for TDD workflow
-4. **Leverage TypeScript** - Let the compiler catch bugs for you
-5. **Keep it simple** - This template has everything you need, nothing you don't
+Validate an IPv4 address.
 
-## 🤝 Join the Community
-
-Found this helpful? Here's how you can contribute:
-
-1. 🌟 **Star this repo** - Show some love!
-2. 🍴 **Fork & improve** - Make it even better
-3. 🐛 **Report issues** - Help us squash bugs
-4. 💡 **Share ideas** - What features would you love?
-
-### 🎯 Contributing
 ```bash
-git checkout -b feature/amazing-idea
-# Make your changes
-git commit -m "feat: add amazing feature"
-git push origin feature/amazing-idea
-# Open a PR and describe your changes
+ipnav validate-ip 192.168.1.1
+# ✅ Valid IP address: 192.168.1.1
+
+ipnav vip 256.1.2.3
+# ❌ Invalid IP address: 256.1.2.3
 ```
 
-## 📄 License & Credits
+#### `validate-mask <mask>` (alias: `vmask`)
 
-**MIT License** - Use it, modify it, ship it! 🚀
+Validate a subnet mask.
 
-Built with ❤️ by **Marc Tyson CLEBERT**  
-📧 [contact@marctysonclebert.com](mailto:contact@marctysonclebert.com)
+```bash
+ipnav validate-mask 255.255.255.0
+# ✅ Valid subnet mask: 255.255.255.0
+```
+
+#### `validate-cidr <cidr>` (alias: `vcidr`)
+
+Validate CIDR notation.
+
+```bash
+ipnav validate-cidr 192.168.1.0/24
+# ✅ Valid CIDR notation: 192.168.1.0/24
+```
+
+#### `validate-batch <addresses...>` (alias: `vbatch`)
+
+Validate multiple IP addresses at once.
+
+```bash
+ipnav validate-batch 192.168.1.1 10.0.0.1 256.1.1.1 8.8.8.8
+# ✅ 192.168.1.1
+# ✅ 10.0.0.1
+# ❌ 256.1.1.1
+# ✅ 8.8.8.8
+# 📊 Summary: 3 valid, 1 invalid (4 total)
+```
+
+Options:
+
+- `-q, --quiet` - Only show invalid addresses
 
 ---
 
-## 🎉 Ready to Build Something Amazing?
+### Conversion Commands
 
-This isn't just another starter template - it's your launchpad to TypeScript mastery. Every line is crafted for developer happiness and productivity.
+#### `to-binary <address>` (alias: `bin`)
 
-**Stop configuring. Start building.** 🚀
+Convert IP address to binary representation.
+
+```bash
+ipnav to-binary 192.168.1.1
+# IP Address: 192.168.1.1
+# Binary:     11000000.10101000.00000001.00000001
+```
+
+Options:
+
+- `-s, --spaces` - Use spaces instead of dots as separators
+
+#### `from-binary <binary>` (alias: `fbin`)
+
+Convert binary to IP address.
+
+```bash
+ipnav from-binary 11000000.10101000.00000001.00000001
+# Binary:     11000000.10101000.00000001.00000001
+# IP Address: 192.168.1.1
+```
+
+#### `to-integer <address>` (alias: `int`)
+
+Convert IP address to 32-bit integer.
+
+```bash
+ipnav to-integer 192.168.1.1
+# IP Address: 192.168.1.1
+# Integer:    3232235777
+
+ipnav int 192.168.1.1 --hex
+# IP Address: 192.168.1.1
+# Integer:    3232235777
+# Hexadecimal: 0xC0A80101
+```
+
+Options:
+
+- `-h, --hex` - Display result in hexadecimal
+
+#### `from-integer <number>` (alias: `fint`)
+
+Convert 32-bit integer to IP address.
+
+```bash
+ipnav from-integer 3232235777
+# Integer:    3232235777
+# IP Address: 192.168.1.1
+```
+
+#### `cidr-to-mask <prefix>` (alias: `c2m`)
+
+Convert CIDR prefix to subnet mask.
+
+```bash
+ipnav cidr-to-mask 24
+# CIDR Prefix:  /24
+# Subnet Mask:  255.255.255.0
+# Binary:       11111111.11111111.11111111.00000000
+```
+
+#### `mask-to-cidr <mask>` (alias: `m2c`)
+
+Convert subnet mask to CIDR prefix.
+
+```bash
+ipnav mask-to-cidr 255.255.255.0
+# Subnet Mask:  255.255.255.0
+# CIDR Prefix:  /24
+# Binary:       11111111.11111111.11111111.00000000
+```
+
+#### `convert <address>` (alias: `cvt`)
+
+Show all representations of an IP address.
+
+```bash
+ipnav convert 192.168.1.1
+
+# 🔢 IP Address Representations:
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# Decimal:     192.168.1.1
+# Binary:      11000000.10101000.00000001.00000001
+# Integer:     3232235777
+# Hexadecimal: 0xC0A80101
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
 
 ---
 
-*⭐ If this template saved you time, give it a star! Your support means the world to open source maintainers.*
+### Subnet Commands
+
+#### `subnet-info <address> [mask]` (alias: `sinfo`)
+
+Get comprehensive subnet information.
+
+```bash
+ipnav subnet-info 192.168.1.100 255.255.255.0
+
+# 📊 Subnet Information:
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# IP Address:        192.168.1.100
+# Subnet Mask:       255.255.255.0
+# Network Address:   192.168.1.0
+# Broadcast Address: 192.168.1.255
+# First Usable:      192.168.1.1
+# Last Usable:       192.168.1.254
+# Total Hosts:       256
+# Usable Hosts:      254
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+# Using CIDR notation
+ipnav sinfo 192.168.1.100 --cidr 24
+```
+
+Options:
+
+- `-c, --cidr <prefix>` - Use CIDR notation instead of subnet mask
+
+#### `network-address <address> <mask>` (alias: `netaddr`)
+
+Calculate network address from IP and subnet mask.
+
+```bash
+ipnav network-address 192.168.1.100 255.255.255.0
+# Network Address: 192.168.1.0
+```
+
+#### `broadcast-address <address> <mask>` (alias: `bcast`)
+
+Calculate broadcast address from IP and subnet mask.
+
+```bash
+ipnav broadcast-address 192.168.1.100 255.255.255.0
+# Broadcast Address: 192.168.1.255
+```
+
+#### `in-subnet <address> <network> <mask>` (alias: `insubnet`)
+
+Check if an IP address belongs to a subnet.
+
+```bash
+ipnav in-subnet 192.168.1.100 192.168.1.0 255.255.255.0
+# ✅ 192.168.1.100 belongs to subnet 192.168.1.0/255.255.255.0
+
+ipnav insubnet 10.0.0.1 192.168.1.0 255.255.255.0
+# ❌ 10.0.0.1 does NOT belong to subnet 192.168.1.0/255.255.255.0
+```
+
+---
+
+### IP Operations
+
+#### `classify <address>` (alias: `class`)
+
+Classify IP address as public or private.
+
+```bash
+ipnav classify 192.168.1.1
+
+# 🔍 IP Classification:
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# IP Address: 192.168.1.1
+# Type:       🏠 Private IP
+# Standard:   RFC 1918 (Private Network)
+# Range:      192.168.0.0 - 192.168.255.255
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ipnav class 8.8.8.8
+# Type:       🌐 Public IP
+```
+
+#### `next <address>`
+
+Get the next IP address in sequence.
+
+```bash
+ipnav next 192.168.1.1
+# Current: 192.168.1.1
+# Next 1:  192.168.1.2
+
+ipnav next 192.168.1.1 --count 5
+# Current: 192.168.1.1
+# Next 1:  192.168.1.2
+# Next 2:  192.168.1.3
+# Next 3:  192.168.1.4
+# Next 4:  192.168.1.5
+# Next 5:  192.168.1.6
+```
+
+Options:
+
+- `-n, --count <number>` - Get N next IP addresses (1-100)
+
+#### `previous <address>` (alias: `prev`)
+
+Get the previous IP address in sequence.
+
+```bash
+ipnav previous 192.168.1.10
+# Prev 1: 192.168.1.9
+# Current: 192.168.1.10
+
+ipnav prev 192.168.1.10 --count 3
+# Prev 3: 192.168.1.7
+# Prev 2: 192.168.1.8
+# Prev 1: 192.168.1.9
+# Current: 192.168.1.10
+```
+
+Options:
+
+- `-n, --count <number>` - Get N previous IP addresses (1-100)
+
+#### `range <start> <end>`
+
+Generate all IP addresses between start and end (inclusive).
+
+```bash
+ipnav range 192.168.1.1 192.168.1.5
+
+# 📋 IP Range (5 addresses):
+#   1. 192.168.1.1
+#   2. 192.168.1.2
+#   3. 192.168.1.3
+#   4. 192.168.1.4
+#   5. 192.168.1.5
+
+ipnav range 192.168.1.1 192.168.1.255 --count
+
+# 📊 IP Range Information:
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# Start:  192.168.1.1
+# End:    192.168.1.255
+# Count:  255 addresses
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
+
+Options:
+
+- `-c, --count` - Only show the count of IPs in range
+- `-l, --limit <number>` - Limit output to specified number of IPs (default: 100)
+
+#### `compare <ip1> <ip2>` (alias: `cmp`)
+
+Compare two IP addresses numerically.
+
+```bash
+ipnav compare 192.168.1.1 192.168.1.2
+
+# 🔢 IP Comparison:
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# IP 1:   192.168.1.1
+# IP 2:   192.168.1.2
+# Result: 192.168.1.1 < 192.168.1.2 (IP 1 is smaller)
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
+
+---
+
+## Command Reference
+
+| Command             | Alias      | Description                 |
+| ------------------- | ---------- | --------------------------- |
+| `validate-ip`       | `vip`      | Validate IPv4 address       |
+| `validate-mask`     | `vmask`    | Validate subnet mask        |
+| `validate-cidr`     | `vcidr`    | Validate CIDR notation      |
+| `validate-batch`    | `vbatch`   | Validate multiple IPs       |
+| `to-binary`         | `bin`      | Convert IP to binary        |
+| `from-binary`       | `fbin`     | Convert binary to IP        |
+| `to-integer`        | `int`      | Convert IP to integer       |
+| `from-integer`      | `fint`     | Convert integer to IP       |
+| `cidr-to-mask`      | `c2m`      | Convert CIDR to subnet mask |
+| `mask-to-cidr`      | `m2c`      | Convert subnet mask to CIDR |
+| `convert`           | `cvt`      | Show all IP representations |
+| `subnet-info`       | `sinfo`    | Get subnet information      |
+| `network-address`   | `netaddr`  | Calculate network address   |
+| `broadcast-address` | `bcast`    | Calculate broadcast address |
+| `in-subnet`         | `insubnet` | Check subnet membership     |
+| `classify`          | `class`    | Classify as public/private  |
+| `next`              | -          | Get next IP address         |
+| `previous`          | `prev`     | Get previous IP address     |
+| `range`             | -          | Generate IP range           |
+| `compare`           | `cmp`      | Compare two IPs             |
+
+## Common Use Cases
+
+### Network Administration
+
+```bash
+# Check if a host is in your network
+ipnav in-subnet 192.168.1.50 192.168.1.0 255.255.255.0
+
+# Get available hosts in a subnet
+ipnav subnet-info 192.168.1.0 --cidr 24
+
+# Find network and broadcast addresses
+ipnav network-address 10.0.50.100 255.255.255.0
+ipnav broadcast-address 10.0.50.100 255.255.255.0
+```
+
+### Security & Filtering
+
+```bash
+# Check if an IP is public (external) or private (internal)
+ipnav classify 203.0.113.45
+
+# Validate a list of IPs from a file
+cat ip_list.txt | xargs ipnav validate-batch --quiet
+```
+
+### Development & Testing
+
+```bash
+# Generate test IP addresses
+ipnav range 192.168.1.1 192.168.1.10
+
+# Convert IPs for different formats
+ipnav convert 172.16.0.1
+
+# Get sequential IPs for testing
+ipnav next 10.0.0.1 --count 5
+```
+
+### Learning & Documentation
+
+```bash
+# Understand subnet calculations
+ipnav subnet-info 192.168.1.100 255.255.255.0
+
+# See all representations of an IP
+ipnav convert 8.8.8.8
+
+# Convert between CIDR and subnet mask
+ipnav cidr-to-mask 24
+ipnav mask-to-cidr 255.255.0.0
+```
+
+## Exit Codes
+
+- `0` - Success
+- `1` - Error (invalid input, validation failure, etc.)
+
+This makes the CLI perfect for use in shell scripts:
+
+```bash
+#!/bin/bash
+if ipnav validate-ip "$1"; then
+    echo "Valid IP, proceeding..."
+else
+    echo "Invalid IP, aborting!"
+    exit 1
+fi
+```
+
+## Tips & Tricks
+
+### Use Aliases for Speed
+
+```bash
+ipnav vip 192.168.1.1      # Instead of validate-ip
+ipnav bin 10.0.0.1          # Instead of to-binary
+ipnav cvt 172.16.0.1        # Instead of convert
+```
+
+### Pipe Operations
+
+```bash
+# Validate IPs from a file
+cat servers.txt | xargs ipnav validate-batch
+
+# Process multiple conversions
+echo "192.168.1.1 10.0.0.1" | xargs -n1 ipnav to-integer
+```
+
+### Combine with Other Tools
+
+```bash
+# Extract IPs from logs and validate them
+grep -oE '\b([0-9]{1,3}\.){3}[0-9]{1,3}\b' access.log | \
+  sort -u | \
+  xargs ipnav validate-batch
+```
+
+## Requirements
+
+- Node.js 14.x or higher
+
+## Dependencies
+
+- [ip-navigator](https://www.npmjs.com/package/ip-navigator) - Core IP address operations
+- [commander](https://www.npmjs.com/package/commander) - CLI framework
+
+## Related Projects
+
+- [ip-navigator](https://www.npmjs.com/package/ip-navigator) - The core library powering this CLI
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Author
+
+**Marc Tyson CLEBERT <contact@marctysonclebert.com>**
+
+- Website: [marctysonclebert.com](https://www.marctysonclebert.com)
+- GitHub: [@clebertmarctyson](https://github.com/clebertmarctyson)
+- Twitter/X: [@ClebertTyson](https://x.com/ClebertTyson)
+- Buy me a coffee: [Support my work](https://www.buymeacoffee.com/marctysonclebert)
+
+## Support the Project
+
+If `ip-navigator-cli` has been helpful to you, consider:
+
+- ⭐ Starring the repo
+- 🐛 Reporting bugs
+- 💡 Suggesting features
+- ☕ [Buying me a coffee](https://www.buymeacoffee.com/marctysonclebert)
+
+---
+
+Made with ❤️ using [ip-navigator](https://www.npmjs.com/package/ip-navigator)

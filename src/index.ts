@@ -1,5 +1,4 @@
-import { add, sub } from "@/lib/math";
+#!/usr/bin/env node
+import program from "@/lib/program.js";
 
-console.log(add(1, 2));
-console.log(sub(1, 2));
-console.log(process.env.PORT);
+program.parse();

@@ -1,37 +1,60 @@
 {
-  "name": "node-ts-starter",
+  "name": "ip-navigator-cli",
   "version": "1.0.0",
-  "description": "A modern Node.js TypeScript starter template with Jest testing",
+  "description": "CLI tool for IP address operations",
   "main": "index.js",
   "type": "module",
+  "bin": {
+    "ipnav": "./dist/index.js"
+  },
   "scripts": {
-    "dev": "tsx watch --env-file=.env src/index.ts",
     "build": "tsc && tsc-alias",
     "start": "node --env-file=.env dist/index.js",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "clean": "node clean.cjs"
+    "dev": "tsx watch --env-file=.env src/index.ts"
+  },
+  "homepage": "https://github.com/clebertmarctyson/ip-navigator-cli#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/clebertmarctyson/ip-navigator-cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/clebertmarctyson/ip-navigator-cli/issues",
+    "email": "contact@marctysonclebert.com"
+  },
+  "funding": {
+    "type": "buymeacoffee",
+    "url": "https://www.buymeacoffee.com/marctysonclebert"
   },
   "keywords": [
-    "typescript",
-    "nodejs",
-    "starter",
-    "template",
-    "jest"
+    "ip",
+    "ipv4",
+    "ip-address",
+    "cli",
+    "command-line",
+    "terminal",
+    "command-line-interface",
+    "tools",
+    "network",
+    "networking",
+    "subnet",
+    "cli-tool",
+    "ip-navigator"
   ],
-  "author": "Marc Tyson CLEBERT <contact@marctysonclebert.com>",
+  "author": {
+    "name": "Marc Tyson CLEBERT",
+    "email": "contact@marctysonclebert.com",
+    "url": "https://www.marctysonclebert.com"
+  },
   "license": "MIT",
-  "packageManager": "pnpm@10.17.1",
+  "packageManager": "pnpm@10.22.0",
   "dependencies": {
+    "commander": "^14.0.2",
+    "ip-navigator": "^1.0.17",
     "tsx": "^4.20.6"
   },
   "devDependencies": {
-    "@jest/globals": "^30.1.2",
-    "@types/jest": "^30.0.0",
-    "@types/node": "^24.5.2",
-    "jest": "^30.1.3",
-    "ts-jest": "^29.4.4",
+    "@types/node": "^24.10.1",
     "tsc-alias": "^1.8.16",
-    "typescript": "^5.9.2"
+    "typescript": "^5.9.3"
   }
 }

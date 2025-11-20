@@ -1,16 +1,14 @@
 {
   "compilerOptions": {
-    "ignoreDeprecations": "6.0", // Ignore deprecation warnings for moduleResolution: "node" and baseUrl: "."
     "target": "esnext", // Specify ECMAScript target version
-    "module": "commonjs", // Specify what module code generation
-    "moduleResolution": "node", // Specify module code generation
+    "module": "nodenext", // Specify what module code generation
+    "moduleResolution": "nodenext", // Specify module code generation
     "outDir": "./dist", // The output directory
     "rootDir": "./src", // The root directory of input files
-    "baseUrl": ".", // The base directory to resolve relative module names
     "paths": {
-      "@/*": ["./src/*"] // Aliases for paths
+      "@/*": ["./src/*"] // Aliases for paths,
     },
-    "types": ["jest", "node"], // Typescript type checking
+    "types": ["node"], // Typescript type checking
     "allowSyntheticDefaultImports": true, // Allows you to import a module via `import 'file'` instead of `import {default} from 'file'`
     "esModuleInterop": true, // Enables you to import a module via `import * as x from 'file'`
     "experimentalDecorators": true, // Allows you to use decorators
