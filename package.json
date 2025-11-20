@@ -1,6 +1,6 @@
 {
   "name": "ip-navigator-cli",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "CLI tool for IP address operations",
   "main": "index.js",
   "type": "module",
