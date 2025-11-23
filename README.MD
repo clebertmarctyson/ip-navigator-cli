@@ -54,6 +54,35 @@ npm install ip-navigator-cli
 npx ip-navigator-cli <command>
 ```
 
+## Shell Integration
+
+### Oh My Zsh Plugin
+
+Boost your productivity with convenient aliases and completions:
+
+```bash
+git clone https://github.com/clebertmarctyson/oh-my-zsh-ipnav \
+  ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/ipnav
+```
+
+Add `ipnav` to your plugins in `~/.zshrc`:
+
+```bash
+plugins=(
+  # ... other plugins
+  ipnav
+)
+```
+
+**Available shortcuts:**
+
+- `ipv` → `ipnav validate-ip`
+- `ipbin` → `ipnav to-binary`
+- `ipclass` → `ipnav classify`
+- And many more...
+
+[View full documentation for oh-my-zsh →](https://github.com/clebertmarctyson/oh-my-zsh-ipnav)
+
 ## Quick Start
 
 ```bash
