@@ -1,14 +1,16 @@
 import { Command } from "commander";
 
+import { isValidIPAddress, isValidSubnetMask } from "ip-navigator/validation";
+
+import { cidrToSubnetMask } from "ip-navigator/conversion";
+
 import {
-  getSubnetInfo,
-  calculateNetworkAddress,
   calculateBroadcastAddress,
-  isIPAddressInSubnet,
-  isValidIPAddress,
-  isValidSubnetMask,
-  cidrToSubnetMask,
-} from "ip-navigator";
+  calculateNetworkAddress,
+  getSubnetInfo,
+} from "ip-navigator/subnet";
+
+import { isIPAddressInSubnet } from "ip-navigator/operation";
 
 /**
  * Registers all subnet operation commands to the CLI program

@@ -2,7 +2,7 @@
   "name": "ip-navigator-cli",
   "version": "1.0.3",
   "description": "CLI tool for IP address operations",
-  "main": "index.js",
+  "main": "dist/index.js",
   "type": "module",
   "files": [
     "dist",
@@ -13,8 +13,9 @@
   },
   "scripts": {
     "build": "tsc && tsc-alias",
-    "start": "node --env-file=.env dist/index.js",
-    "dev": "tsx watch --env-file=.env src/index.ts"
+    "start": "pnpm build && node dist/index.js",
+    "dev": "tsx watch src/index.ts",
+    "prepublishOnly": "npm run build"
   },
   "homepage": "https://github.com/clebertmarctyson/ip-navigator-cli#readme",
   "repository": {
@@ -50,9 +51,12 @@
     "url": "https://www.marctysonclebert.com"
   },
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "commander": "^14.0.2",
-    "ip-navigator": "^1.0.17",
+    "ip-navigator": "^1.0.19",
     "tsx": "^4.20.6"
   },
   "devDependencies": {

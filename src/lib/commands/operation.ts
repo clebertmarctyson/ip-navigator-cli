@@ -1,5 +1,7 @@
 import { Command } from "commander";
 
+import { isValidIPAddress } from "ip-navigator/validation";
+
 import {
   isPublicIP,
   isPrivateIP,
@@ -7,8 +9,7 @@ import {
   getPreviousIPAddress,
   getIPRange,
   compareIPAddresses,
-  isValidIPAddress,
-} from "ip-navigator";
+} from "ip-navigator/operation";
 
 /**
  * Registers all IP address operation commands to the CLI program

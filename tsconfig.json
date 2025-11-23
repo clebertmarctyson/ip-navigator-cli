@@ -1,23 +1,23 @@
 {
   "compilerOptions": {
-    "target": "esnext", // Specify ECMAScript target version
-    "module": "nodenext", // Specify what module code generation
-    "moduleResolution": "nodenext", // Specify module code generation
-    "outDir": "./dist", // The output directory
-    "rootDir": "./src", // The root directory of input files
+    "target": "esnext",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "outDir": "./dist",
+    "rootDir": "./src",
     "paths": {
-      "@/*": ["./src/*"] // Aliases for paths,
+      "@/*": ["./src/*"]
     },
-    "types": ["node"], // Typescript type checking
-    "allowSyntheticDefaultImports": true, // Allows you to import a module via `import 'file'` instead of `import {default} from 'file'`
-    "esModuleInterop": true, // Enables you to import a module via `import * as x from 'file'`
-    "experimentalDecorators": true, // Allows you to use decorators
-    "emitDecoratorMetadata": true, // Allows you to use decorators
-    "forceConsistentCasingInFileNames": true, // Disallow inconsistent use of capitalization in identifiers
-    "resolveJsonModule": true, // Allows you to import .json files
-    "skipLibCheck": false, // Skip type checking of declaration files
-    "strict": true // Enable all strict type-checking options
-  }, // Compiler options
-  "include": ["src/**/*.ts"], // Specify the files to be compiled
-  "exclude": ["node_modules"] // Specify the files to be excluded from compilation
+    "types": ["node"],
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "strict": true
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules"]
 }

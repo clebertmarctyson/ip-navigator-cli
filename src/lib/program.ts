@@ -1,4 +1,5 @@
 import { Command } from "commander";
+
 import { registerValidationCommands } from "@/lib/commands/validation.js";
 import { registerConversionCommands } from "@/lib/commands/conversion.js";
 import { registerSubnetCommands } from "@/lib/commands/subnet.js";

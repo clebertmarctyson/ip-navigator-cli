@@ -12,8 +12,8 @@ importers:
         specifier: ^14.0.2
         version: 14.0.2
       ip-navigator:
-        specifier: ^1.0.17
-        version: 1.0.17
+        specifier: ^1.0.19
+        version: 1.0.19
       tsx:
         specifier: ^4.20.6
         version: 4.20.6
@@ -269,8 +269,8 @@ packages:
     resolution: {integrity: sha512-hsBTNUqQTDwkWtcdYI2i06Y/nUBEsNEDJKjWdigLvegy8kDuJAS8uRlpkkcQpyEXL0Z/pjDy5HBmMjRCJ2gq+g==}
     engines: {node: '>= 4'}
 
-  ip-navigator@1.0.17:
-    resolution: {integrity: sha512-zItdiK419ezeKdtLRuTCodBilzrt7wwz3kUqBzfYUikD3A1IkJuS99ERYMoQkR3IypzlY9LD7P8mc1nD79ub7A==}
+  ip-navigator@1.0.19:
+    resolution: {integrity: sha512-KGubmGAu5+K2pWsmn0Zv1Cc3/o7GWr71iWUfZNLKxSklRQiUNZ81Lj197wruIEaXUuk7iMPMyLYbVv4NoYVnrw==}
 
   is-binary-path@2.1.0:
     resolution: {integrity: sha512-ZMERYes6pDydyuGidse7OsHxtbI7WVeUEozgR/g7rd0xUimYNlvZRE/K2MgZTjWy725IfelLeVcEM97mmtRGXw==}
@@ -559,7 +559,7 @@ snapshots:
 
   ignore@5.3.2: {}
 
-  ip-navigator@1.0.17: {}
+  ip-navigator@1.0.19: {}
 
   is-binary-path@2.1.0:
     dependencies:

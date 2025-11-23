@@ -4,7 +4,7 @@ import {
   isValidIPAddress,
   isValidSubnetMask,
   isValidCIDR,
-} from "ip-navigator/dist/validation/index.js";
+} from "ip-navigator/validation";
 
 /**
  * Registers all IP validation commands to the CLI program

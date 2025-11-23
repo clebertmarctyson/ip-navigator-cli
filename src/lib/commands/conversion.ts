@@ -7,9 +7,9 @@ import {
   integerToIP,
   cidrToSubnetMask,
   subnetMaskToCIDR,
-  isValidIPAddress,
-  isValidSubnetMask,
-} from "ip-navigator";
+} from "ip-navigator/conversion";
+
+import { isValidIPAddress, isValidSubnetMask } from "ip-navigator/validation";
 
 /**
  * Registers all IP conversion commands to the CLI program
