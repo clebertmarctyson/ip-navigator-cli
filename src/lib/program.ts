@@ -1,3 +1,28 @@
+import { readFileSync, existsSync } from "fs";
+import { fileURLToPath } from "url";
+import { dirname, join } from "path";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+function findPackageJson(startDir: string): string {
+  let currentDir = startDir;
+
+  while (currentDir !== dirname(currentDir)) {
+    const packagePath = join(currentDir, "package.json");
+    if (existsSync(packagePath)) {
+      return packagePath;
+    }
+    currentDir = dirname(currentDir);
+  }
+
+  throw new Error("package.json not found");
+}
+
+const packageJson = JSON.parse(
+  readFileSync(findPackageJson(__dirname), "utf-8")
+);
+
 import { Command } from "commander";
 
 import { registerValidationCommands } from "@/lib/commands/validation.js";
@@ -10,7 +35,7 @@ const program = new Command();
 program
   .name("ipnav")
   .description("🌐 CLI tool for IP address operations powered by ip-navigator")
-  .version("1.0.0", "-v, --version", "Display version number")
+  .version(packageJson.version, "-v, --version", "Display version number")
   .showHelpAfterError("(add --help for additional information)")
   .showSuggestionAfterError()
   .addHelpText(
@@ -26,7 +51,7 @@ Examples:
 For more information on a specific command:
   $ ipnav <command> --help
 
-Documentation: https://www.npmjs.com/package/ip-navigator`
+Documentation: https://www.npmjs.com/package/ip-navigator-cli`
   );
 
 // Register all command groups
