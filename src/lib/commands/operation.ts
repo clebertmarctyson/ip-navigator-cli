@@ -20,7 +20,8 @@ export function registerOperationCommands(program: Command): void {
     .command("classify <address>")
     .alias("class")
     .description("Classify IP address as public or private")
-    .action((address: string) => {
+    .option("-p, --plain", "Output plain format (public/private only)")
+    .action((address: string, options: { plain?: boolean }) => {
       try {
         if (!isValidIPAddress(address)) {
           console.error(`❌ Invalid IP address: ${address}`);
@@ -28,13 +29,20 @@ export function registerOperationCommands(program: Command): void {
         }
 
         const isPublic = isPublicIP(address);
+
+        // Plain output mode
+        if (options.plain) {
+          console.log(isPublic ? "public" : "private");
+          return;
+        }
+
         const isPrivate = isPrivateIP(address);
 
         console.log(`\n🔍 IP Classification:`);
         console.log(`━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`);
         console.log(`IP Address: ${address}`);
         console.log(
-          `Type:       ${isPublic ? "🌐 Public IP" : "🏠 Private IP"}`
+          `Type:       ${isPublic ? "🌐 Public IP" : "🏠 Private IP"}`,
         );
 
         if (isPrivate) {
@@ -55,7 +63,7 @@ export function registerOperationCommands(program: Command): void {
         console.error(
           `❌ Error classifying IP: ${
             error instanceof Error ? error.message : String(error)
-          }`
+          }`,
         );
         process.exit(1);
       }
@@ -66,7 +74,8 @@ export function registerOperationCommands(program: Command): void {
     .command("next <address>")
     .description("Get the next IP address in sequence")
     .option("-n, --count <number>", "Get N next IP addresses", "1")
-    .action((address: string, options: { count: string }) => {
+    .option("-p, --plain", "Output plain IP list (one per line)")
+    .action((address: string, options: { count: string; plain?: boolean }) => {
       try {
         if (!isValidIPAddress(address)) {
           console.error(`❌ Invalid IP address: ${address}`);
@@ -79,18 +88,30 @@ export function registerOperationCommands(program: Command): void {
           process.exit(1);
         }
 
-        console.log(`Current: ${address}`);
-
         let current = address;
+        const results: string[] = [];
+
         for (let i = 0; i < count; i++) {
           current = getNextIPAddress(current);
-          console.log(`Next ${i + 1}:  ${current}`);
+          results.push(current);
         }
+
+        // Plain output mode
+        if (options.plain) {
+          results.forEach((ip) => console.log(ip));
+          return;
+        }
+
+        // Formatted output
+        console.log(`Current: ${address}`);
+        results.forEach((ip, i) => {
+          console.log(`Next ${i + 1}:  ${ip}`);
+        });
       } catch (error) {
         console.error(
           `❌ Error getting next IP: ${
             error instanceof Error ? error.message : String(error)
-          }`
+          }`,
         );
         process.exit(1);
       }
@@ -102,7 +123,8 @@ export function registerOperationCommands(program: Command): void {
     .alias("prev")
     .description("Get the previous IP address in sequence")
     .option("-n, --count <number>", "Get N previous IP addresses", "1")
-    .action((address: string, options: { count: string }) => {
+    .option("-p, --plain", "Output plain IP list (one per line)")
+    .action((address: string, options: { count: string; plain?: boolean }) => {
       try {
         if (!isValidIPAddress(address)) {
           console.error(`❌ Invalid IP address: ${address}`);
@@ -116,17 +138,29 @@ export function registerOperationCommands(program: Command): void {
         }
 
         let current = address;
+        const results: string[] = [];
+
         for (let i = count; i > 0; i--) {
           current = getPreviousIPAddress(current);
-          console.log(`Prev ${i}: ${current}`);
+          results.push(current);
         }
 
+        // Plain output mode
+        if (options.plain) {
+          results.forEach((ip) => console.log(ip));
+          return;
+        }
+
+        // Formatted output
+        results.forEach((ip, i) => {
+          console.log(`Prev ${count - i}: ${ip}`);
+        });
         console.log(`Current: ${address}`);
       } catch (error) {
         console.error(
           `❌ Error getting previous IP: ${
             error instanceof Error ? error.message : String(error)
-          }`
+          }`,
         );
         process.exit(1);
       }
@@ -140,13 +174,14 @@ export function registerOperationCommands(program: Command): void {
     .option(
       "-l, --limit <number>",
       "Limit output to specified number of IPs",
-      "100"
+      "100",
     )
+    .option("-p, --plain", "Output plain IP list (one per line, no formatting)")
     .action(
       (
         start: string,
         end: string,
-        options: { count?: boolean; limit: string }
+        options: { count?: boolean; limit: string; plain?: boolean },
       ) => {
         try {
           if (!isValidIPAddress(start)) {
@@ -161,13 +196,21 @@ export function registerOperationCommands(program: Command): void {
           const comparison = compareIPAddresses(start, end);
           if (comparison > 0) {
             console.error(
-              `❌ Start IP (${start}) must be less than or equal to end IP (${end})`
+              `❌ Start IP (${start}) must be less than or equal to end IP (${end})`,
             );
             process.exit(1);
           }
 
           const range = getIPRange(start, end);
           const limit = parseInt(options.limit, 10);
+
+          // Plain output mode for piping to tools like nmap
+          if (options.plain) {
+            range.forEach((ip) => {
+              console.log(ip);
+            });
+            return;
+          }
 
           if (options.count) {
             console.log(`\n📊 IP Range Information:`);
@@ -179,7 +222,7 @@ export function registerOperationCommands(program: Command): void {
           } else {
             if (range.length > limit) {
               console.log(
-                `\n⚠️  Range contains ${range.length.toLocaleString()} IPs. Showing first ${limit}:\n`
+                `\n⚠️  Range contains ${range.length.toLocaleString()} IPs. Showing first ${limit}:\n`,
               );
               range.slice(0, limit).forEach((ip, idx) => {
                 console.log(`${(idx + 1).toString().padStart(3, " ")}. ${ip}`);
@@ -187,14 +230,14 @@ export function registerOperationCommands(program: Command): void {
               console.log(
                 `\n... and ${(
                   range.length - limit
-                ).toLocaleString()} more addresses`
+                ).toLocaleString()} more addresses`,
               );
               console.log(
-                `\nTip: Use --count to see total or --limit N to show more`
+                `\nTip: Use --count to see total or --limit N to show more`,
               );
             } else {
               console.log(
-                `\n📋 IP Range (${range.length.toLocaleString()} addresses):\n`
+                `\n📋 IP Range (${range.length.toLocaleString()} addresses):\n`,
               );
               range.forEach((ip, idx) => {
                 console.log(`${(idx + 1).toString().padStart(3, " ")}. ${ip}`);
@@ -205,11 +248,11 @@ export function registerOperationCommands(program: Command): void {
           console.error(
             `❌ Error generating IP range: ${
               error instanceof Error ? error.message : String(error)
-            }`
+            }`,
           );
           process.exit(1);
         }
-      }
+      },
     );
 
   // Compare IP addresses
@@ -217,7 +260,11 @@ export function registerOperationCommands(program: Command): void {
     .command("compare <ip1> <ip2>")
     .alias("cmp")
     .description("Compare two IP addresses numerically")
-    .action((ip1: string, ip2: string) => {
+    .option(
+      "-p, --plain",
+      "Output plain format (-1 for less, 0 for equal, 1 for greater)",
+    )
+    .action((ip1: string, ip2: string, options: { plain?: boolean }) => {
       try {
         if (!isValidIPAddress(ip1)) {
           console.error(`❌ Invalid IP address: ${ip1}`);
@@ -229,6 +276,12 @@ export function registerOperationCommands(program: Command): void {
         }
 
         const result = compareIPAddresses(ip1, ip2);
+
+        // Plain output mode
+        if (options.plain) {
+          console.log(result);
+          return;
+        }
 
         console.log(`\n🔢 IP Comparison:`);
         console.log(`━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`);
@@ -247,7 +300,7 @@ export function registerOperationCommands(program: Command): void {
         console.error(
           `❌ Error comparing IPs: ${
             error instanceof Error ? error.message : String(error)
-          }`
+          }`,
         );
         process.exit(1);
       }

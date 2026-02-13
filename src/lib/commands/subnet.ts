@@ -22,11 +22,15 @@ export function registerSubnetCommands(program: Command): void {
     .alias("sinfo")
     .description("Get comprehensive subnet information")
     .option("-c, --cidr <prefix>", "Use CIDR notation instead of subnet mask")
+    .option(
+      "-p, --plain",
+      "Output tab-separated values: network broadcast firstUsable lastUsable totalHosts usableHosts",
+    )
     .action(
       (
         address: string,
         mask: string | undefined,
-        options: { cidr?: string }
+        options: { cidr?: string; plain?: boolean },
       ) => {
         try {
           if (!isValidIPAddress(address)) {
@@ -51,12 +55,20 @@ export function registerSubnetCommands(program: Command): void {
             subnetMask = mask;
           } else {
             console.error(
-              "❌ Please provide either a subnet mask or use --cidr flag"
+              "❌ Please provide either a subnet mask or use --cidr flag",
             );
             process.exit(1);
           }
 
           const info = getSubnetInfo(address, subnetMask);
+
+          // Plain output mode - tab separated for easy parsing
+          if (options.plain) {
+            console.log(
+              `${info.networkAddress}\t${info.broadcastAddress}\t${info.firstUsableHost}\t${info.lastUsableHost}\t${info.totalHosts}\t${info.usableHosts}`,
+            );
+            return;
+          }
 
           console.log(`\n📊 Subnet Information:`);
           console.log(`━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`);
@@ -68,18 +80,18 @@ export function registerSubnetCommands(program: Command): void {
           console.log(`Last Usable:       ${info.lastUsableHost}`);
           console.log(`Total Hosts:       ${info.totalHosts.toLocaleString()}`);
           console.log(
-            `Usable Hosts:      ${info.usableHosts.toLocaleString()}`
+            `Usable Hosts:      ${info.usableHosts.toLocaleString()}`,
           );
           console.log(`━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`);
         } catch (error) {
           console.error(
             `❌ Error calculating subnet info: ${
               error instanceof Error ? error.message : String(error)
-            }`
+            }`,
           );
           process.exit(1);
         }
-      }
+      },
     );
 
   // Network address calculation
@@ -87,7 +99,8 @@ export function registerSubnetCommands(program: Command): void {
     .command("network-address <address> <mask>")
     .alias("netaddr")
     .description("Calculate network address from IP and subnet mask")
-    .action((address: string, mask: string) => {
+    .option("-p, --plain", "Output only the network address")
+    .action((address: string, mask: string, options: { plain?: boolean }) => {
       try {
         if (!isValidIPAddress(address)) {
           console.error(`❌ Invalid IP address: ${address}`);
@@ -99,12 +112,19 @@ export function registerSubnetCommands(program: Command): void {
         }
 
         const networkAddr = calculateNetworkAddress(address, mask);
+
+        // Plain output mode
+        if (options.plain) {
+          console.log(networkAddr);
+          return;
+        }
+
         console.log(`Network Address: ${networkAddr}`);
       } catch (error) {
         console.error(
           `❌ Error calculating network address: ${
             error instanceof Error ? error.message : String(error)
-          }`
+          }`,
         );
         process.exit(1);
       }
@@ -115,7 +135,8 @@ export function registerSubnetCommands(program: Command): void {
     .command("broadcast-address <address> <mask>")
     .alias("bcast")
     .description("Calculate broadcast address from IP and subnet mask")
-    .action((address: string, mask: string) => {
+    .option("-p, --plain", "Output only the broadcast address")
+    .action((address: string, mask: string, options: { plain?: boolean }) => {
       try {
         if (!isValidIPAddress(address)) {
           console.error(`❌ Invalid IP address: ${address}`);
@@ -127,12 +148,19 @@ export function registerSubnetCommands(program: Command): void {
         }
 
         const broadcastAddr = calculateBroadcastAddress(address, mask);
+
+        // Plain output mode
+        if (options.plain) {
+          console.log(broadcastAddr);
+          return;
+        }
+
         console.log(`Broadcast Address: ${broadcastAddr}`);
       } catch (error) {
         console.error(
           `❌ Error calculating broadcast address: ${
             error instanceof Error ? error.message : String(error)
-          }`
+          }`,
         );
         process.exit(1);
       }
@@ -143,39 +171,54 @@ export function registerSubnetCommands(program: Command): void {
     .command("in-subnet <address> <network> <mask>")
     .alias("insubnet")
     .description("Check if an IP address belongs to a subnet")
-    .action((address: string, network: string, mask: string) => {
-      try {
-        if (!isValidIPAddress(address)) {
-          console.error(`❌ Invalid IP address: ${address}`);
-          process.exit(1);
-        }
-        if (!isValidIPAddress(network)) {
-          console.error(`❌ Invalid network address: ${network}`);
-          process.exit(1);
-        }
-        if (!isValidSubnetMask(mask)) {
-          console.error(`❌ Invalid subnet mask: ${mask}`);
-          process.exit(1);
-        }
+    .option("-p, --plain", "Output only 'true' or 'false'")
+    .action(
+      (
+        address: string,
+        network: string,
+        mask: string,
+        options: { plain?: boolean },
+      ) => {
+        try {
+          if (!isValidIPAddress(address)) {
+            console.error(`❌ Invalid IP address: ${address}`);
+            process.exit(1);
+          }
+          if (!isValidIPAddress(network)) {
+            console.error(`❌ Invalid network address: ${network}`);
+            process.exit(1);
+          }
+          if (!isValidSubnetMask(mask)) {
+            console.error(`❌ Invalid subnet mask: ${mask}`);
+            process.exit(1);
+          }
 
-        const isInSubnet = isIPAddressInSubnet(address, network, mask);
+          const isInSubnet = isIPAddressInSubnet(address, network, mask);
 
-        if (isInSubnet) {
-          console.log(`✅ ${address} belongs to subnet ${network}/${mask}`);
-          process.exit(0);
-        } else {
-          console.log(
-            `❌ ${address} does NOT belong to subnet ${network}/${mask}`
+          // Plain output mode
+          if (options.plain) {
+            console.log(isInSubnet ? "true" : "false");
+            process.exit(isInSubnet ? 0 : 1);
+            return;
+          }
+
+          if (isInSubnet) {
+            console.log(`✅ ${address} belongs to subnet ${network}/${mask}`);
+            process.exit(0);
+          } else {
+            console.log(
+              `❌ ${address} does NOT belong to subnet ${network}/${mask}`,
+            );
+            process.exit(1);
+          }
+        } catch (error) {
+          console.error(
+            `❌ Error checking subnet membership: ${
+              error instanceof Error ? error.message : String(error)
+            }`,
           );
           process.exit(1);
         }
-      } catch (error) {
-        console.error(
-          `❌ Error checking subnet membership: ${
-            error instanceof Error ? error.message : String(error)
-          }`
-        );
-        process.exit(1);
-      }
-    });
+      },
+    );
 }
